@@ -6,3 +6,4 @@ DT*/
 *.o
 Report/
 *.root
+result_others/
