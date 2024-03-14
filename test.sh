@@ -1,1 +1,1 @@
-vncviewer -via sbgat24 localhost
+vncviewer -via sbgat24 localhost 123
