@@ -1,0 +1,100 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <TFile.h>
+#include <TTree.h>
+#include <TH1.h>
+#include <TF1.h>
+#include <TCanvas.h>
+#include <TFitResult.h>
+#include <TStopwatch.h>
+#include <TLatex.h>
+#include <TStyle.h>
+#include <iomanip>
+#include "Mystyle.h"
+using namespace std;
+void SetMystyle()
+{
+
+   // Show the statistics box
+   //  gStyle->SetOptStat(1111); // Set the statistics option to show all statistics
+   gStyle->SetOptFit(1111); 
+   //Set pad Margin
+//    gStyle->SetPadLeftMargin(0.15);
+//    gStyle->SetPadBottomMargin(0.15);
+//    gStyle->SetPadTopMargin(0.05);
+//    gStyle->SetPadRightMargin(0.05);
+
+   //Set Grid X and Y
+   gStyle->SetPadGridX(1);
+   gStyle->SetPadGridY(1);
+   gStyle->SetPadTickY(1);
+   gStyle->SetPadTickX(1);
+   gStyle->SetLineWidth(2);
+
+   //Set customize the axes
+   gStyle->SetLabelSize(0.05, "XYZ");
+   gStyle->SetLabelFont(132, "XYZ");
+   gStyle->SetLabelOffset(0.01, "XYZ");
+   gStyle->SetNdivisions(105, "XYZ");
+   // Set the label's alignment to center
+   //gStyle->SetLabelAlign(22); // 22 corresponds to aligning the label at the center (X and Y axis)
+
+
+   //Set Axia Title
+   gStyle->SetTitleFont(132, "XYZ");
+   gStyle->SetTitleOffset(0.91, "XYZ");
+   gStyle->SetTitleSize(0.05, "XYZ");
+
+   //Set legend
+   gStyle->SetLegendBorderSize(0);
+   gStyle->SetLegendFont(132);
+
+   //histogram
+   // Set the default line width for histograms using gStyle
+   // gStyle->SetHistLineWidth(3); // Change the default histogram line width to 2 (adjust as needed)
+   // gStyle->SetFuncColor(kPink); // Change the default histogram line width to 2 (adjust as needed)
+
+
+}
+
+int Gethistrogram_test (){
+    SetMystyle();  
+    gStyle->SetOptFit(1111);                                                        
+    //set initial parmeters
+    TString rootfile;
+    TString inputfilename;
+    TString rob_id = "0";
+
+    TString ROB_id = rob_id;
+
+    TString pathDir1 = "../Result";
+    rootfile = pathDir1 + "/fit_result_ROB_"+ ROB_id +".root";
+    TString filename = rootfile;
+    TFile *infile = new TFile(filename, "READ");
+    // Check if the file is opened successfully
+    if (!infile || infile->IsZombie()) {
+        std::cerr << "Error: Unable to open file!" << std::endl;
+        return 0;
+    }
+    int sigma = 3;
+    for(int id = 14 ; id < 15; id ++){
+        TString histname;
+        if (id < 10)
+            histname = "h_charge_ROB0" + ROB_id + "_ch0" + id  + "_sigma_" + sigma;
+        else
+            histname = "h_charge_ROB0" + ROB_id + "_ch" + id + "_sigma_" + sigma;
+        cout << histname << endl;
+        TH1F *histogram = (TH1F*)infile->Get(histname);
+        histogram->SetLineWidth(2); // Set the line width to 2
+        histogram->SetLineColor(1); // Set the line width to 2
+        
+        TCanvas *canvas1 = new TCanvas("canvas1", "Histogram Canvas", 800, 600);
+        canvas1->cd();
+        gPad->SetLogy(); // Sets logarithmic scale for the current pad
+        histogram->Draw();
+        canvas1->SaveAs(Form("charge_rob" + ROB_id + "_channel_%d" + "_sigma_" + sigma+ ".pdf", id));
+    }
+   
+    return 0;
+}

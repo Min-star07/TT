@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% extends "web/base.html" %} {% block main_body %} {% load static %}
+
+<body>
+<section class="section">
+    <div class=class="card border-success mb-3" style="max-width: 100%">
+      <div class="card-header text-center">ROB pedestal stability</div>
+      <div class="card-body text-success">
+      <div class="row">
+        {%for i in ped %}
+        <div class="col-lg-3">
+
+             <h5 class="card-title">ROB_ {{i}}</h5> 
+
+              <embed src="..\..\static\img\{{i}}" alt="i" />
+
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</section> 
+<section class="section">
+    <div class=class="card border-success mb-3" style="max-width: 100%">
+      <div class="card-header text-center">ROB Q1 distribution</div>
+      <div class="card-body text-success">
+      <div class="row">
+        {%for i in Q1_dis %}
+        <div class="col-lg-3">
+
+             <h5 class="card-title">ROB_ {{i}}</h5> 
+
+              <embed src="..\..\static\img\{{i}}" alt="i" />
+
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</section> 
+
+<section class="section">
+    <div class=class="card border-success mb-3" style="max-width: 100%">
+      <div class="card-header text-center">ROB Q1 stability</div>
+      <div class="card-body text-success">
+      <div class="row">
+        {%for i in Q1_sta %}
+        <div class="col-lg-3">
+
+             <h5 class="card-title">ROB_ {{i}}</h5> 
+
+              <embed src="..\..\static\img\{{i}}" alt="i" />
+
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</section> 
+
+<section class="section">
+    <div class=class="card border-success mb-3" style="max-width: 100%">
+      <div class="card-header text-center">Channel fit result</div>
+      <div class="card-body text-success">
+      <div class="row">
+        {%for i in fit %}
+        <div class="col-lg-3">
+
+             <h5 class="card-title">ROB_ {{i}}</h5> 
+
+              <embed src="..\..\static\img\{{i}}" alt="i" />
+
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</section> 
+
+</body>
+
+{% endblock %}

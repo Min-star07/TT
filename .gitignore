@@ -1,0 +1,8 @@
+Result/
+data/
+DT*/
+*.pdf
+.vscode/
+*.o
+Report/
+*.root

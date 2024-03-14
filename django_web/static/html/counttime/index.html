@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Time Counter</title>
+    <style>
+      /* Optional: Add some basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 100px;
+      }
+      #countdown {
+        font-size: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Time Counter</h1>
+    <p>Time since September 16, 2023:</p>
+    <p id="countdown"></p>
+
+    <script>
+      // Set the specified date (year, month (0-11), day)
+      const specifiedDate = new Date(2023, 8, 16).getTime(); // September is represented as 8 (0-based index)
+
+      // Update the countdown every second
+      setInterval(updateCountdown, 1000);
+
+      function updateCountdown() {
+        const currentDate = new Date().getTime();
+        const timeDifference = currentDate - specifiedDate;
+
+        // Calculate remaining days, hours, minutes, and seconds
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor(
+          (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        // Display the time since the specified date on the webpage
+        document.getElementById(
+          "countdown"
+        ).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+    </script>
+  </body>
+</html>

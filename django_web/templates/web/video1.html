@@ -1,0 +1,56 @@
+{% extends "web/base.html" %} {% block main_body %} {% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Local Video Playlist</title>
+  </head>
+  <body>
+    <h1>Local Video Playlist</h1>
+
+    <ul id="videoList">
+      <li>
+        <a
+          href="{% static 'video/1EnglishConversationPracticeEasyToSpeakEnglishFluentlyDailyEnglish.mp4' %}"
+          >Video 1</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% static 'video/2HappyMothersDayShouldwebuymomflowersEnglishConversationforDaily.mp4' %}"
+          >Video 2</a
+        >
+      </li>
+      <li>
+        <a href="{% static 'video/100day.mp4' %}">Video 3</a>
+      </li>
+      <!-- Add more video links as needed -->
+    </ul>
+
+    <video id="videoPlayer" width="640" height="360" controls>
+      <source src="" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <script>
+      // Get video elements
+      const videoList = document.getElementById("videoList");
+      const videoPlayer = document.getElementById("videoPlayer");
+
+      // Add event listener to video links
+      videoList.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent link navigation
+
+        // Check if the clicked element is an anchor tag
+        if (event.target.tagName === "A") {
+          // Set the video source and play the selected video
+          videoPlayer.src = event.target.href;
+          videoPlayer.load(); // Load the new source
+          videoPlayer.play(); // Play the video
+        }
+      });
+    </script>
+  </body>
+</html>
+
+{%endblock%}
+<pre></pre>

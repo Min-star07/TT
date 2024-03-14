@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+{% extends "web/base.html" %} {% block main_body %} {% load static %}
+<html lang="en">
+  <body>
+    <div class="container">
+      <section class="section">
+        <div class="row">
+          <div class="col">
+            <div class="card" style="width: 18rem">
+              <img
+                src="{% static 'img/tttelescope.jpg' %}"
+                class="card-img-top"
+                alt="..."
+              />
+              {% comment %} <img src=""{% static 'img/tttelescope.jpg' %}""
+              class="card-img-top" alt="..."> {% endcomment %}
+              <div class="card-body">
+                <h5 class="card-title">TT</h5>
+                <p class="card-text">TT calibration data.</p>
+                <a
+                  href=" http://sbgat456.in2p3.fr/TestBenchDB/"
+                  class="btn btn-primary"
+                  >Go</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem">
+              <img
+                src="{% static 'img/tttelescope.jpg' %}"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">TT telescope</h5>
+                <p class="card-text">TT telescope calibration data.</p>
+                <a
+                  href="http://sbgat456.in2p3.fr/TestBenchDB/index.py?view_mode=General+information&view_mode=Data+summary&view_mode=Data+Graph&selection_mode=By+Category&selected=7"
+                  class="btn btn-primary"
+                  >Go</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem">
+              <img
+                src="{% static 'img/tttelescope.jpg' %}"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">TT telescope DAQ</h5>
+                <p class="card-text">TT telescope data test result</p>
+                <a
+                  href="http://sbgat24.in2p3.fr/ElectronicsCard/"
+                  class="btn btn-primary"
+                  >Go</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem">
+              <img
+                src="{% static 'img/tttelescope.jpg' %}"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">ELOG</h5>
+                <p class="card-text">TT telescope elog.</p>
+                <a
+                  href="https://juno.in2p3.fr/elog/Muon+Telescope/"
+                  class="btn btn-primary"
+                  >Go</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Datatables</h5>
+                <p>
+                  Add lightweight datatables to your project with using the
+                  <a
+                    href="https://github.com/fiduswriter/Simple-DataTables"
+                    target="_blank"
+                    >Simple DataTables</a
+                  >
+                  library. Just add <code>.datatable</code> class name to any
+                  table you wish to conver to a datatable. Check for
+                  <a
+                    href="https://fiduswriter.github.io/simple-datatables/demos/"
+                    target="_blank"
+                    >more examples</a
+                  >.
+                </p>
+
+                <!-- Table with stripped rows -->
+                <div class="datatable-container" style="overflow-x: scroll">
+                  <table class="table datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">FEB</th>
+                        <th scope="col">ROB</th>
+                        <th scope="col">LOCATION</th>
+                        <th scope="col">OTHERS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>9</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>4003</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>4004</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>5002</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>5</td>
+                        <td>5003</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>6</td>
+                        <td>5007</td>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>7</td>
+                        <td>5009</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>8</td>
+                        <td>5011</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- End Table with stripped rows -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="row">
+          <img src="{% static 'img/fit.png' %}" class="center" alt="..." />
+        </div>
+      </section>
+      <section class="section">
+        <div class="row">
+          <h5 class="card-title">Charts</h5>
+          <p>
+            ApexCharts Examples. You can check the
+            <a
+              href="https://apexcharts.com/javascript-chart-demos/"
+              target="_blank"
+              >official website</a
+            >
+            for more examples.
+          </p>
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Line Chart</h5>
+
+                <!-- Line Chart -->
+                <div id="lineChart"></div>
+
+                <script>
+                  document.addEventListener("DOMContentLoaded", () => {
+                    new ApexCharts(document.querySelector("#lineChart"), {
+                      series: [
+                        {
+                          name: "Desktops",
+                          data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+                        },
+                      ],
+                      chart: {
+                        height: 350,
+                        type: "line",
+                        zoom: {
+                          enabled: false,
+                        },
+                      },
+                      dataLabels: {
+                        enabled: false,
+                      },
+                      stroke: {
+                        curve: "straight",
+                      },
+                      grid: {
+                        row: {
+                          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+                          opacity: 0.5,
+                        },
+                      },
+                      xaxis: {
+                        categories: [
+                          "Jan",
+                          "Feb",
+                          "Mar",
+                          "Apr",
+                          "May",
+                          "Jun",
+                          "Jul",
+                          "Aug",
+                          "Sep",
+                        ],
+                      },
+                    }).render();
+                  });
+                </script>
+                <!-- End Line Chart -->
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Pie Chart</h5>
+
+                <!-- Pie Chart -->
+                <div id="pieChart"></div>
+
+                <script>
+                  document.addEventListener("DOMContentLoaded", () => {
+                    new ApexCharts(document.querySelector("#pieChart"), {
+                      series: [44, 55, 13, 43, 22],
+                      chart: {
+                        height: 350,
+                        type: "pie",
+                        toolbar: {
+                          show: true,
+                        },
+                      },
+                      labels: [
+                        "Team A",
+                        "Team B",
+                        "Team C",
+                        "Team D",
+                        "Team E",
+                      ],
+                    }).render();
+                  });
+                </script>
+                <!-- End Pie Chart -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+{% endblock %}

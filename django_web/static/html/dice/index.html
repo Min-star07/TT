@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dice Rolling</title>
+    <style>
+      /* Optional: Add some basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 100px;
+      }
+      #dice {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dice Rolling</h1>
+    <p>Click the button to roll the dice:</p>
+    <div id="dice"></div>
+    <p id="result"></p>
+
+    <button onclick="rollDice()">Roll Dice</button>
+
+    <script>
+      function rollDice() {
+        // Generate a random number between 1 and 6 (representing a dice face)
+        const result = Math.floor(Math.random() * 6) + 1;
+
+        // Display the dice result
+        document.getElementById("dice").innerText = `You rolled: ${result}`;
+
+        // Perform an action based on the dice result
+        performAction(result);
+      }
+
+      function performAction(result) {
+        // Perform different actions based on the dice result
+        switch (result) {
+          case 1:
+            document.getElementById("result").innerText =
+              "Action  1: Xiao Qi Chuang SiWa";
+            // Add your action for result 1 here
+            break;
+          case 2:
+            document.getElementById("result").innerText =
+              "Action 2 Xiao Qi Xia Ci Sheng Qi, Huo Mian Ka";
+            // Add your action for result 2 here
+            break;
+          case 3:
+            document.getElementById("result").innerText =
+              "Action 3: Xiao Qi Jiao Lao Gong";
+            // Add your action for result 3 here
+            break;
+          case 4:
+            document.getElementById("result").innerText =
+              "Action 4: He Xiao Qi Kan Dong Xi, 30 fenzhong";
+            // Add your action for result 4 here
+            break;
+          case 5:
+            document.getElementById("result").innerText =
+              "Action 5 : He Xiao Li Kan Dong Xi, 30 fenzhong";
+            // Add your action for result 5 here
+            break;
+          case 6:
+            document.getElementById("result").innerText =
+              "Action 6: Xiao Qi Zhu Dong 10 Fen zhong";
+            // Add your action for result 6 here
+            break;
+          default:
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>

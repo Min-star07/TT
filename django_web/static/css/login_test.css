@@ -1,0 +1,39 @@
+* {
+	/* 初始化 清除页面元素的内外边距 */
+	padding: 0;
+	margin: 0;
+	/* 盒子模型 */
+	box-sizing: border-box;
+}
+
+ .login-box {
+            width: 400px;
+            /* height:400px; */
+            margin-left:auto;
+            margin-right: auto;
+            margin-top: 250px;
+
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            border: 1px solid #4894a7;
+            border-radius: 5px;
+            background-color: rgb(133, 162, 185);
+}
+.form-group {
+          margin-bottom: 25px;
+          background-color: #05192e;
+          color: #fff;
+        }
+        
+.btn-default {
+            background-color: #05192e;
+            color: #fff;
+}
+
+.btn-default:hover {
+            background-color: #0056b3;
+}
+.login-box h2{
+    text-align :center;
+}
