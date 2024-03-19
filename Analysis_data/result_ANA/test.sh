@@ -1,5 +1,5 @@
 #!/bin/bash
-
+conda activate
 # Run the Python script
 numbers=(15)
 # for i in {5..5}

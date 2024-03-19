@@ -28,7 +28,10 @@ int main(int argc, char** argv){
     string channel_check = "0";
     string sigma = "3";
     string mode = "1";
-    string q1 = "12";
+    string q_default = "12";
+    string mu_default = "1.0";
+    string sigma1_default = "20";
+    string times_default = "3";
     for (int i = 0; i < argc; i++)
     {
         if (strcmp(argv[i], "-m") == 0)
@@ -37,7 +40,7 @@ int main(int argc, char** argv){
         }
         if (strcmp(argv[i], "-q") == 0)
         {
-            q1 = argv[i+1];
+            q_default = argv[i+1];
         }
         if(strcmp(argv[i], "-led") == 0){
             led_rootfile = argv[i+1];
@@ -51,9 +54,15 @@ int main(int argc, char** argv){
         if(strcmp(argv[i], "-channel") == 0){
             channel_check = argv[i+1];
         }
-        // if(strcmp(argv[i], "-sigma") == 0){
-        //     sigma = argv[i+1];
-        // }
+        if(strcmp(argv[i], "-mu") == 0){
+            mu_default = argv[i+1];
+        }
+        if(strcmp(argv[i], "-sigma1") == 0){
+            sigma1_default = argv[i+1];
+        }
+        if(strcmp(argv[i], "-times") == 0){
+            times_default = argv[i+1];
+        }
     }
 
     //define canvas style
@@ -67,10 +76,13 @@ int main(int argc, char** argv){
     TString CN = channel_check;
     int mode_new = atoi(mode.c_str());
     int ROB_id_new = atoi(rob_id.c_str());
-    double q1_new = atof(q1.c_str());
+    double q_new = atof(q_default.c_str());
+    double mu_new = atof(mu_default.c_str());
+    double sigma1_new = atof(sigma1_default.c_str());
+    double times_new = atof(times_default.c_str());
     int Channel_check = atoi(channel_check.c_str());
     // int Sigma = atoi(sigma.c_str());
-    int Sigma = -5;
+    // int Sigma = -5;
 
     TFile *infile = new TFile(filename_LED, "READ");
 
@@ -80,7 +92,7 @@ int main(int argc, char** argv){
         return 0;
     }
     string pathDir = "./Result";
-    //handlePath(pathDir);
+    handlePath(pathDir);
     TString outrootfilename =  pathDir + "/fit_result_ROB_" + ROB_id + "_channel_" + CN  +".root";
     TFile *outfile_root = new TFile(outrootfilename, "RECREATE");
     // Open a file for writing
@@ -111,7 +123,7 @@ int main(int argc, char** argv){
         return 0;
     }
     outfile_txt << "ROB" << "\t" << "Channel" << "\t" << "flag_fit_method" << "\t" << "flag_chi2" <<"\t" << "Chi2NDF"<< "\t"<<"ped_mean"<<"\t" << "ped_sigma"<<"\t"<< "Sigma" << "\t" << "Min_x"<< "\t" << "Max_x" << "\t" << "N0" << "\t" << "Q_{0}" << "\t" << "Q_{1}" << "\t" << "#sigma_{0}"<< "\t" <<"#sigma_{1}" << "\t" <<"w" << "\t" << "#alpha"<< "\t" << "#mu" << "\t" << "err1" << "\t" << "err2" << "\t" << "err3" << "\t" << "err4" << "\t" << "err5" << "\t" << "err6" << "\t" << "err7" << "\t" << "err8"<< endl;
-    while(Sigma < 4){
+    while(times_new  < 4){
     // for(int id = Chanel_start;id < Chanel_end; id ++){
     //for(int id = 7;id < 8; id ++){
     // Get the histogram from the file
@@ -141,13 +153,15 @@ int main(int argc, char** argv){
     //2.2 set the fit range
 
     double fitMin;
+
     if (mode_new == 1)
-    { histogram->GetXaxis()->SetRangeUser(0, 250);
-       fitMin  = ped_gauss[0]- Sigma * ped_gauss[1]; //fit left range: mu - 3 * sigma
+    { 
+       histogram->GetXaxis()->SetRangeUser(0, 250);
+       fitMin  = ped_gauss[0]- times_new  * ped_gauss[1]; //fit left range: mu - 3 * sigma
       }
     else{
          histogram->GetXaxis()->SetRangeUser(0, 1500);
-         fitMin = ped_gauss[0]- Sigma * 3; //fit left range: mu - 3 * sigma
+         fitMin = ped_gauss[0]- times_new  * 3; //fit left range: mu - 3 * sigma
     }
    
     histogram->GetXaxis()->CenterTitle();
@@ -175,7 +189,7 @@ int main(int argc, char** argv){
         int entries_number = histogram->Integral();
         // func[i]->SetParameters(55000, ped_gauss[0], 12, ped_gauss[1], 10, 0.1, 0.2, 1.0);
         // func[i]->SetParameters(entries_number, ped_gauss[0], 11, ped_gauss[1], 11, 0.1, 0.2, 0.5);
-        func[i]->SetParameters(entries_number, ped_gauss[0], q1_new, ped_gauss[1], 10, 0.1, 0.2, 1.0);
+        func[i]->SetParameters(entries_number, ped_gauss[0], q_new, ped_gauss[1], sigma1_new, 0.1, 0.2, mu_new);
         // func[i]->SetParameters(entries_number, 20, 12, 1, 10, 0.1, 0.2, 0.5);
         func[i]->SetParNames("N_{0}","Q_{0}","Q_{1}", "#sigma_{0}","#sigma_{1}", "w","#alpha", "#mu");
         func[i]->FixParameter(0, histogram->Integral());
@@ -195,7 +209,7 @@ int main(int argc, char** argv){
     // TCanvas *canvas1 = new TCanvas("canvas1", "Histogram Canvas", 800, 600);
     // canvas1->cd();
     // gPad->SetLogy(); // Sets logarithmic scale for the current pad
-    TString histname_new = histname + "_sigma_" + Sigma;
+    TString histname_new = histname + "_sigma_" + times_new ;
     if(chi2ndf_chi2 < chi2ndf_likelihood){        
             func[0]->SetRange(fitMin, fitMax);
             histogram->Fit(func[0], "R");
@@ -214,7 +228,7 @@ int main(int argc, char** argv){
         para_chi2 = func[0]->GetParameters();
         chi2_error = func[0]->GetParErrors();
         //CalculateChiSquare(histogram, fitMin, fitMax, para_chi2);
-        outfile_txt << ROB_id << "\t" << Channel_check << "\t" << flag_fit_method << "\t" << flag_chi2 << "\t" << setprecision(5)<< chi2ndf_chi2 << "\t"<<ped_gauss[0] << "\t" << ped_gauss[1] << "\t" <<Sigma << "\t" << fitMin << "\t" << fitMax ;
+        outfile_txt << ROB_id << "\t" << Channel_check << "\t" << flag_fit_method << "\t" << flag_chi2 << "\t" << setprecision(5)<< chi2ndf_chi2 << "\t"<<ped_gauss[0] << "\t" << ped_gauss[1] << "\t" <<times_new  << "\t" << fitMin << "\t" << fitMax ;
         for(int i = 0; i < 8; i++){
         outfile_txt << "\t" << para_chi2[i];
         }
@@ -239,7 +253,7 @@ int main(int argc, char** argv){
         para_likelihood = func[1]->GetParameters();
         likelihood_error = func[1]->GetParErrors();
         //CalculateChiSquare(histogram, fitMin, fitMax, para_likelihood);
-        outfile_txt << ROB_id << "\t" << Channel_check << "\t" << flag_fit_method << "\t" << flag_chi2 << "\t" << setprecision(5)<< chi2ndf_likelihood << "\t"<<ped_gauss[0] << "\t" << ped_gauss[1]<< "\t" <<Sigma<< "\t" << fitMin << "\t" << fitMax ;
+        outfile_txt << ROB_id << "\t" << Channel_check << "\t" << flag_fit_method << "\t" << flag_chi2 << "\t" << setprecision(5)<< chi2ndf_likelihood << "\t"<<ped_gauss[0] << "\t" << ped_gauss[1]<< "\t" <<times_new << "\t" << fitMin << "\t" << fitMax ;
         for(int i = 0; i < 8; i++){
         outfile_txt << "\t" << para_likelihood[i];
         }
@@ -249,7 +263,7 @@ int main(int argc, char** argv){
         }
     outfile_txt << endl;  
 //    }////loop channel
-   Sigma ++;
+   times_new  ++;
 }
     outfile_root->Close();
     infile->Close();

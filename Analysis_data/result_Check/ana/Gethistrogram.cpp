@@ -37,7 +37,7 @@ int main (int argc, char** argv){
     TString CH = channel_id;
     int ROB_id_new = atoi(rob_id.c_str());
     int Chanel_id = atoi(channel_id.c_str());
-    TString pathDir1 = "../Result";
+    TString pathDir1 = "../check/Result";
     TString pathDir2 = "./Final_Result";
     rootfile = pathDir1 + "/fit_result_ROB_"+ ROB_id + "_channel_" + CH +".root";
     TString filename = rootfile;
@@ -47,59 +47,10 @@ int main (int argc, char** argv){
         std::cerr << "Error: Unable to open file!" << std::endl;
         return 0;
     }
-
-    // for(int id = 0 ; id < 64; id ++){
-    //     TString histname;
-    //     if (id < 10)
-    //         histname = "h_charge_ROB0" + ROB_id + "_ch0" + id  + "_sigma_" + Sigma[id];
-    //     else
-    //         histname = "h_charge_ROB0" + ROB_id + "_ch" + id + "_sigma_" + Sigma[id];
-    //     cout << histname << endl;
-    //     TH1F *histogram = (TH1F*)infile->Get(histname);
-    //     histogram->SetLineWidth(2); // Set the line width to 2
-    //     histogram->SetLineColor(1); // Set the line width to 2
-        
-    //     TCanvas *canvas1 = new TCanvas("canvas1", "Histogram Canvas", 800, 600);
-    //     canvas1->cd();
-    //     gPad->SetLogy(); // Sets logarithmic scale for the current pad
-    //     histogram->Draw();
-    //     canvas1->SaveAs(Form("./ROB"+ ROB_id + "/charge_rob" + ROB_id + "_channel_%d" + "_sigma_" + Sigma[id]+ ".pdf", id));
-    // }
-    // TCanvas *canvas1 = new TCanvas("canvas1", "Histogram Canvas", 800, 600);
-    // canvas1->Print("Final_Result/ROB_" + ROB_id + "_final_result.pdf[");
-    // gPad->SetLogy();     
-    // for(int id = 38 ; id < 39; id ++){
-        
-    //     TString histname;
-
-    //      if (ROB_id <10){
-    //     if (id < 10)
-    //         histname = "h_charge_ROB0" + ROB_id + "_ch0" + id  + "_sigma_" + Sigma[id];
-    //     else
-    //         histname = "h_charge_ROB0" + ROB_id + "_ch" + id + "_sigma_" + Sigma[id];
-    // }
-    // else{
-    //    if (id < 10)
-    //         histname = "h_charge_ROB" + ROB_id + "_ch0" + id  + "_sigma_" + Sigma[id];
-    //     else
-    //         histname = "h_charge_ROB" + ROB_id + "_ch" + id + "_sigma_" + Sigma[id];
-    // }
-    
-        
-    //     cout << histname << endl;
-    //     TH1F *histogram = (TH1F*)infile->Get(histname);
-    //     histogram->SetLineWidth(2); // Set the line width to 2
-    //     histogram->SetLineColor(1); // Set the line width to 2
-    //     histogram->GetXaxis()->SetRangeUser(0, 1500);
-    //      // Sets logarithmic scale for the current pad
-    //     histogram->Draw();
-    //     canvas1->Print("Final_Result/ROB_" + ROB_id + "_final_result.pdf");    
-    // }
-    // canvas1->Print("Final_Result/ROB_" + ROB_id + "_final_result.pdf]");
      TCanvas *canvas1 = new TCanvas("canvas1", "Histogram Canvas", 800, 600);
     canvas1->Print("Final_Result/ROB_" + ROB_id + "_check_channel_" + CH + "_result.pdf[");
     gPad->SetLogy();     
-    for (int i = -5; i < 4; i ++)
+    for (int i = 0; i < 4; i ++)
     {
         TString histname;
         if (ROB_id_new < 10)

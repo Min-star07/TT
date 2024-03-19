@@ -9,8 +9,8 @@ void handlePath(const std::string& pathStr ) {
 
     if (fs::exists(myPath)) {
         if (fs::is_directory(myPath)) {
-            std::cout << "Directory exists. Deleting..." << std::endl;
-            fs::remove_all(myPath); // Delete directory and its contents
+            std::cout << "Directory exists. go on..." << std::endl;
+            // fs::remove_all(myPath); // Delete directory and its contents
         } else {
             std::cout << "File exists, not a directory." << std::endl;
             return;

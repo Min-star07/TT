@@ -1,5 +1,0 @@
-# The process of data analysis
-1. run test.sh @result_GEN, need to modify data file and pedestal file 
-2. run test.sh @result_ANA, need to mofdify ROB number , mode(1,2)
-    2.1. Check every channel fit result according to PDF file
-    2.2. Check fit parameters result according to 

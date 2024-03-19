@@ -202,7 +202,10 @@ def Data_check(infile, filepath):
         [selected_data_negative, selected_data_sigma0, selected_data_sigma1]
     )
     print(select_data)
-    select_data["Channel"].to_csv(filepath + "/check_channel.txt", index=None)
+    # Transpose the DataFrame
+    transposed_df = select_data["Channel"].transpose()
+    print(transposed_df)
+    transposed_df.to_csv(filepath + "/check_channel.txt", index=None)
     data_index = select_data.index
     index_list = data_index.tolist()
     print(index_list)
