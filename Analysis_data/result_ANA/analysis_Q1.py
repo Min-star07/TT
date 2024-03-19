@@ -6,12 +6,13 @@ import re
 from scipy.optimize import curve_fit
 from matplotlib.backends.backend_pdf import PdfPages
 import sys
-from analysis_fit_result import fit_parameters_check
+
+# from analysis_fit_result import fit_parameters_check
 
 plt.style.use("mystyle.txt")
 
 
-def Calculate_chi2ndf(infile, CB, ROB, MODE):
+def Calculate_chi2ndf(filepath, infile, CB, ROB, MODE):
     df = pd.read_csv(infile, sep="\t")
     print(df)
     y_max = np.max(df["Q_{1}"])
@@ -116,7 +117,7 @@ def gaussian(x, a1, b1, c1):
     return a1 * np.exp(-((x - b1) ** 2) / (2 * c1**2))
 
 
-def Hist1D_Q1_distrubution(infile, CB, ROB, MODE):
+def Hist1D_Q1_distrubution(filepath, infile, CB, ROB, MODE):
     df = pd.read_csv(infile, sep="\t")
     print(df)
     y_mean = np.mean(df["Q_{1}"])
@@ -193,7 +194,7 @@ def Hist1D_Q1_distrubution(infile, CB, ROB, MODE):
     plt.show()
 
 
-def Hist2D_Q1_distrubution(infile, CB, ROB, MODE):
+def Hist2D_Q1_distrubution(filepath, infile, CB, ROB, MODE):
     df = pd.read_csv(infile, sep="\t")
     print(df)
     # Generate sample data for a 8x8 grid (replace this with your data)
@@ -229,27 +230,28 @@ def Hist2D_Q1_distrubution(infile, CB, ROB, MODE):
     plt.show()
 
 
-if __name__ == "__main__":
-    # Access command-line arguments
-    arguments = sys.argv
-    # Display command-line arguments
-    print("Number of arguments:", len(arguments))
-    print("Argument values:", arguments)
-    # Check if at least one argument was passed
-    if len(sys.argv) > 1:
-        CB = sys.argv[1]
-        ROB = sys.argv[2]
-        MODE = sys.argv[3]
-        print("CB:", CB, "ROB:", ROB, "MODE:", MODE)
-    else:
-        print("No arguments provided.")
-    filepath = "./Result/CB" + str(CB) + "/ROB" + str(ROB)
-    filename = (
-        "/CB" + str(CB) + "_ROB" + str(ROB) + "_final_result_mode_" + str(MODE) + ".txt"
-    )
-    infile = filepath + filename
-    MODE = int(MODE)
-    fit_parameters_check(filepath, infile, CB, ROB, MODE)
-    Calculate_chi2ndf(infile, CB, ROB, MODE)
-    Hist1D_Q1_distrubution(infile, CB, ROB, MODE)
-    Hist2D_Q1_distrubution(infile, CB, ROB, MODE)
+# if __name__ == "__main__":
+#     # Access command-line arguments
+#     arguments = sys.argv
+#     # Display command-line arguments
+#     print("Number of arguments:", len(arguments))
+#     print("Argument values:", arguments)
+#     # Check if at least one argument was passed
+#     if len(sys.argv) > 1:
+#         CB = sys.argv[1]
+#         ROB = sys.argv[2]
+#         MODE = sys.argv[3]
+#         print("CB:", CB, "ROB:", ROB, "MODE:", MODE)
+#     else:
+#         print("No arguments provided.")
+#     filepath = "./Result/CB" + str(CB) + "/ROB" + str(ROB)
+
+#     filename = (
+#         "/CB" + str(CB) + "_ROB" + str(ROB) + "_final_result_mode_" + str(MODE) + ".txt"
+#     )
+#     infile = filepath + filename
+#     MODE = int(MODE)
+#     fit_parameters_check(filepath, infile, CB, ROB, MODE)
+#     Calculate_chi2ndf(infile, CB, ROB, MODE)
+#     Hist1D_Q1_distrubution(infile, CB, ROB, MODE)
+#     Hist2D_Q1_distrubution(infile, CB, ROB, MODE)
