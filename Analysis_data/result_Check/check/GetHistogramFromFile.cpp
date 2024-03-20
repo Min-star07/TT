@@ -32,6 +32,8 @@ int main(int argc, char** argv){
     string mu_default = "1.0";
     string sigma1_default = "20";
     string times_default = "3";
+    string w_default = "0.1";
+    string alpha_default = "0.2";
     for (int i = 0; i < argc; i++)
     {
         if (strcmp(argv[i], "-m") == 0)
@@ -63,6 +65,12 @@ int main(int argc, char** argv){
         if(strcmp(argv[i], "-times") == 0){
             times_default = argv[i+1];
         }
+        if(strcmp(argv[i], "-w") == 0){
+            w_default = argv[i+1];
+        }
+        if(strcmp(argv[i], "-alpha") == 0){
+            alpha_default = argv[i+1];
+        }
     }
 
     //define canvas style
@@ -80,6 +88,8 @@ int main(int argc, char** argv){
     double mu_new = atof(mu_default.c_str());
     double sigma1_new = atof(sigma1_default.c_str());
     double times_new = atof(times_default.c_str());
+    double w_new = atof(w_default.c_str());
+    double alpha_new = atof(alpha_default.c_str());
     int Channel_check = atoi(channel_check.c_str());
     // int Sigma = atoi(sigma.c_str());
     // int Sigma = -5;
@@ -160,7 +170,7 @@ int main(int argc, char** argv){
        fitMin  = ped_gauss[0]- times_new  * ped_gauss[1]; //fit left range: mu - 3 * sigma
       }
     else{
-         histogram->GetXaxis()->SetRangeUser(0, 1500);
+         histogram->GetXaxis()->SetRangeUser(0, 2000);
          fitMin = ped_gauss[0]- times_new  * 3; //fit left range: mu - 3 * sigma
     }
    
@@ -189,7 +199,7 @@ int main(int argc, char** argv){
         int entries_number = histogram->Integral();
         // func[i]->SetParameters(55000, ped_gauss[0], 12, ped_gauss[1], 10, 0.1, 0.2, 1.0);
         // func[i]->SetParameters(entries_number, ped_gauss[0], 11, ped_gauss[1], 11, 0.1, 0.2, 0.5);
-        func[i]->SetParameters(entries_number, ped_gauss[0], q_new, ped_gauss[1], sigma1_new, 0.1, 0.2, mu_new);
+        func[i]->SetParameters(entries_number, ped_gauss[0], q_new, ped_gauss[1], sigma1_new, w_new, alpha_new, mu_new);
         // func[i]->SetParameters(entries_number, 20, 12, 1, 10, 0.1, 0.2, 0.5);
         func[i]->SetParNames("N_{0}","Q_{0}","Q_{1}", "#sigma_{0}","#sigma_{1}", "w","#alpha", "#mu");
         func[i]->FixParameter(0, histogram->Integral());

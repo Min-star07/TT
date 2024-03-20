@@ -33,7 +33,7 @@ for CH_id in "${lines[@]}"
 # sed 1d "$filename" | while IFS= read -r line
 do
     echo $CH_id
-    ./RunFitter -m 2 -q 100 -mu 2 -times -2 -led ../../result_GEN/Data/20240116/led_cCB-22_2024-01-16_20_37_hist.root -ped ../../result_GEN/Data/pedestal/ped_cCB-22_2024-01-09_17_40_hist.root  -ROB $ROB_id -channel $CH_id
+    ./RunFitter -m 2 -sigma1 60 -q 100 -mu 2 -times -5 -w 0.1 -alpha 0.2  -led ../../result_GEN/Data/20240116/led_cCB-22_2024-01-16_20_37_hist.root -ped ../../result_GEN/Data/pedestal/ped_cCB-22_2024-01-09_17_40_hist.root  -ROB $ROB_id -channel $CH_id
 
 done
 

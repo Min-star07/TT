@@ -22,7 +22,7 @@ int main (int argc, char** argv){
     TString inputfilename;
     string rob_id = "2";
     string channel_id = "2";
-    TString sigma_id = "2";
+    string times_default = "2";
 
      for(int i = 0; i < argc; i ++){
         if(strcmp(argv[i], "-ROB") == 0){
@@ -31,12 +31,16 @@ int main (int argc, char** argv){
          if(strcmp(argv[i], "-CH") == 0){
             channel_id = argv[i+1];
         }
+        if(strcmp(argv[i], "-times") == 0){
+            times_default = argv[i+1];
+        }
     }
 
     TString ROB_id = rob_id;
     TString CH = channel_id;
     int ROB_id_new = atoi(rob_id.c_str());
     int Chanel_id = atoi(channel_id.c_str());
+    int times = atoi(times_default.c_str());
     TString pathDir1 = "../check/Result";
     TString pathDir2 = "./Final_Result";
     rootfile = pathDir1 + "/fit_result_ROB_"+ ROB_id + "_channel_" + CH +".root";
@@ -50,21 +54,21 @@ int main (int argc, char** argv){
      TCanvas *canvas1 = new TCanvas("canvas1", "Histogram Canvas", 800, 600);
     canvas1->Print("Final_Result/ROB_" + ROB_id + "_check_channel_" + CH + "_result.pdf[");
     gPad->SetLogy();     
-    for (int i = 0; i < 4; i ++)
+    for (int times  = -5; times < 4; times ++)
     {
         TString histname;
         if (ROB_id_new < 10)
         {
             if (Chanel_id < 10)
-                histname = "h_charge_ROB0" + ROB_id + "_ch0" + CH + "_sigma_" + i;
+                histname = "h_charge_ROB0" + ROB_id + "_ch0" + CH + "_sigma_" + times;
             else
-                histname = "h_charge_ROB0" + ROB_id + "_ch" + CH + "_sigma_" + i;
+                histname = "h_charge_ROB0" + ROB_id + "_ch" + CH + "_sigma_" + times;
         }
         else{
             if (Chanel_id < 10)
-                 histname = "h_charge_ROB" + ROB_id + "_ch0" + CH  + "_sigma_" + i;
+                 histname = "h_charge_ROB" + ROB_id + "_ch0" + CH  + "_sigma_" + times;
             else
-                histname = "h_charge_ROB" + ROB_id + "_ch" + CH + "_sigma_" + i;
+                histname = "h_charge_ROB" + ROB_id + "_ch" + CH + "_sigma_" + times;
     }
         cout << histname << endl;
         TH1F *histogram = (TH1F*)infile->Get(histname);

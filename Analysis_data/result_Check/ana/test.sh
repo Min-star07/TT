@@ -26,7 +26,7 @@ for CH_id in "${lines[@]}"
 # sed 1d "$filename" | while IFS= read -r line
 do
     echo "ROB$ROB_id ---------CHANNRL$CH_id----------------------"
-    ./Run_Getfigure -ROB $ROB_id -CH $CH_id
+    ./Run_Getfigure -ROB $ROB_id -CH $CH_id -time -5
 done
 
 echo "Problem channel should be check---------------------"

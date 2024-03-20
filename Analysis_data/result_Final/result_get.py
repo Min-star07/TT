@@ -19,12 +19,12 @@ def create_path(args):
 def merge_result(args):
     filepath_current = "./CB" + str(args.CB) + "/ROB" + str(args.ROB)
     print(filepath_current)
-    result_corrected = filepath_current + "/check_channel.txt"
+    result_corrected = filepath_current + "/check_channel.ods"
     # Check if the file exists
     if not os.path.exists(result_corrected):
         print(f"{result_corrected} is not exist, please confirm it----------")
         sys.exit()
-    df = pd.read_csv(result_corrected, sep="\t")
+    df = pd.read_excel(result_corrected, engine="odf")
     print(df)
 
     # origial result
@@ -47,6 +47,40 @@ def merge_result(args):
     df_ori_select = df_ori.drop(df["Channel"].tolist())
     df_ori_select["log"] = 1
     print(df_ori_select)
+
+    df_mode_final = []
+    # modified result
+    for i in df["Channel"].tolist():
+        select_condition = df[df["Channel"] == i].iloc[0, 1]
+        print(select_condition)
+        filepath_mod = (
+            "../result_Check/check/Result/fit_result_ROB_"
+            + str(args.ROB)
+            + "_channel_"
+            + str(i)
+            + ".txt"
+        )
+        df_mod = pd.read_csv(filepath_mod, sep="\t")
+        print(df_mod)
+        df_mode_result = df_mod[df_mod["Sigma"] == select_condition]
+        print(df_mode_result)
+        df_mode_final.append(df_mode_result)
+    df_mode_final = pd.concat(df_mode_final)
+    df_mode_final["log"] = 2
+    print(df_mode_final)
+    result = pd.concat([df_ori_select, df_mode_final])
+    result = result.sort_values(by="Channel")
+    result = result.reset_index(drop=True)
+    print(result)
+    result.to_csv(
+        filepath_current
+        + "/Final_result_CB"
+        + str(args.CB)
+        + "_ROB"
+        + str(args.ROB)
+        + ".txt",
+        sep="\t",
+    )
 
 
 if __name__ == "__main__":
