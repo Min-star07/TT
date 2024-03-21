@@ -67,12 +67,11 @@ def merge_result(args):
         df_mode_final.append(df_mode_result)
     df_mode_final = pd.concat(df_mode_final)
     df_mode_final["log"] = 2
-    print(df_mode_final)
     result = pd.concat([df_ori_select, df_mode_final])
-    result = result.sort_values(by="Channel")
-    result = result.reset_index(drop=True)
-    print(result)
-    result.to_csv(
+    result_final = result.sort_values(by="Channel").reset_index(drop=True)
+    # result = result.reset_index(drop=True)
+    print(result_final)
+    result_final.to_csv(
         filepath_current
         + "/Final_result_CB"
         + str(args.CB)
@@ -80,6 +79,7 @@ def merge_result(args):
         + str(args.ROB)
         + ".txt",
         sep="\t",
+        index=False
     )
 
 

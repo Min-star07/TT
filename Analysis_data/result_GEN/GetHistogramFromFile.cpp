@@ -109,7 +109,7 @@ int main(int argc, char** argv){
         std::cerr << "Error opening the file!" << std::endl;
         return 0;
     }
-    outfile_txt << "ROB" << "\t" << "Channel" << "\t" << "flag_fit_method" << "\t" << "flag_chi2" <<"\t" << "Chi2NDF"<< "\t"<<"ped_mean"<<"\t" << "ped_sigma"<<"\t"<< "Sigma" << "\t" << "Min_x"<< "\t" << "Max_x" << "\t" << "N0" << "\t" << "Q_{0}" << "\t" << "Q_{1}" << "\t" << "#sigma_{0}"<< "\t" <<"#sigma_{1}" << "\t" <<"w" << "\t" << "#alpha"<< "\t" << "#mu" << "\t" << "err1" << "\t" << "err2" << "\t" << "err3" << "\t" << "err4" << "\t" << "err5" << "\t" << "err6" << "\t" << "err7" << "\t" << "err8"<< endl;
+    outfile_txt << "ROB" << "\t" << "Channel" << "\t" << "flag_fit_method" << "\t" << "flag_chi2" <<"\t" << "Chi2NDF"<< "\t"<<"ped_mean"<<"\t" << "ped_sigma"<< "\t" <<"ped_constant" << "\t" << "Sigma" << "\t" << "Min_x"<< "\t" << "Max_x" << "\t" << "N0" << "\t" << "Q_{0}" << "\t" << "Q_{1}" << "\t" << "#sigma_{0}"<< "\t" <<"#sigma_{1}" << "\t" <<"w" << "\t" << "#alpha"<< "\t" << "#mu" << "\t" << "err1" << "\t" << "err2" << "\t" << "err3" << "\t" << "err4" << "\t" << "err5" << "\t" << "err6" << "\t" << "err7" << "\t" << "err8"<< endl;
     
     while(Sigma < 4){
     for(int id = Chanel_start;id < Chanel_end; id ++){
@@ -149,7 +149,7 @@ int main(int argc, char** argv){
     double * ped_gauss;
     double fitMin;
     ped_gauss = FitHistogramWithGaussian(filename_PED, histname, mode_new);
-    cout << ped_gauss[0] << "========"<< ped_gauss[1]<< endl;
+    cout << ped_gauss[0] << "========"<< ped_gauss[1]<< "========"<< ped_gauss[2] << endl;
     //2.2 set the fit range
     double mu_value;
     double q1_new;
@@ -222,7 +222,7 @@ int main(int argc, char** argv){
         para_chi2 = func[0]->GetParameters();
         chi2_error = func[0]->GetParErrors();
         //CalculateChiSquare(histogram, fitMin, fitMax, para_chi2);
-        outfile_txt << ROB_id << "\t" << id << "\t" << flag_fit_method << "\t" << flag_chi2 << "\t" << setprecision(5)<< chi2ndf_chi2 << "\t"<<ped_gauss[0] << "\t" << ped_gauss[1] << "\t" <<Sigma << "\t" << fitMin << "\t" << fitMax ;
+        outfile_txt << ROB_id << "\t" << id << "\t" << flag_fit_method << "\t" << flag_chi2 << "\t" << setprecision(5)<< chi2ndf_chi2 << "\t"<<ped_gauss[0] << "\t" << ped_gauss[1] << "\t" <<ped_gauss[2] << "\t" << Sigma << "\t" << fitMin << "\t" << fitMax ;
         for(int i = 0; i < 8; i++){
         outfile_txt << "\t" << para_chi2[i];
         }
