@@ -176,10 +176,29 @@ int main (int argc, char** argv){
                 double * ped_gauss;
                 double fitMin;
                 ped_gauss = FitHistogramWithGaussian(inputrootfile_mod, histname, mode_int);
-                cout << ped_gauss[0] << "========"<< ped_gauss[1]<< "========"<< ped_gauss[2] << endl;
+                cout << ped_gauss[0] << "========" << ped_gauss[1] << "========" << ped_gauss[2] <<"=================="<< ped_gauss[5] << "========" << ped_gauss[6] << endl;
                 TF1 *gaussFunc = new TF1("gaussFunc", gaussian, ped_gauss[3],ped_gauss[4], 3);
-                gaussFunc->SetParameters(ped_gauss[0]*10, ped_gauss[1], ped_gauss[2]); // Amplitude, mean, and sigma
+                gaussFunc->SetParameters(ped_gauss[0]*15, ped_gauss[1], ped_gauss[2]); // Amplitude, mean, and sigma
                 gaussFunc->SetLineColor(3);
+                TF1 *fitFunction = histogram->GetFunction("func1");
+                if(fitFunction){
+                    cout << fitFunction->GetParameter(1) << "========" << fitFunction->GetParameter(3) << "========" << endl;
+                    fitFunction->SetParameter(1, ped_gauss[1]);
+                    fitFunction->SetParameter(3, ped_gauss[2]);
+                    fitFunction->SetParError(1, ped_gauss[5]);
+                    fitFunction->SetParError(3, ped_gauss[6]);
+                
+                
+                }
+                else{
+                TF1 *fitFunction = histogram->GetFunction("func0");
+                    cout << fitFunction->GetParameter(1) << "========" << fitFunction->GetParameter(3) << "========" << endl;
+                    fitFunction->SetParameter(1, ped_gauss[1]);
+                    fitFunction->SetParameter(3, ped_gauss[2]);
+                    fitFunction->SetParError(1, ped_gauss[5]);
+                    fitFunction->SetParError(3, ped_gauss[6]);
+                
+                }
                 histogram->Draw();
                 gaussFunc->Draw("same");
                 // canvas1->Update();

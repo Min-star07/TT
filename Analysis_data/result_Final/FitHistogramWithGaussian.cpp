@@ -42,14 +42,17 @@ double *FitHistogramWithGaussian(TString rootfilename, TString histoname, int mo
     // Fit the histogram with the Gaussian function
     gaussianFit = new TF1("gaussianFit", "gaus", xmin, xmax);
     histogram->Fit(gaussianFit , "R");
-    gaussianFit->Draw();
+    
 
-    static double fit_result[5];
+    static double fit_result[6];
     fit_result[0] = gaussianFit->GetParameter(0);
     fit_result[1] = gaussianFit->GetParameter(1);
     fit_result[2] = gaussianFit->GetParameter(2);
     fit_result[3] = xmin;
     fit_result[4] = xmax;
+    fit_result[5] = gaussianFit->GetParError(1);
+    fit_result[6] = gaussianFit->GetParError(2);
+    
  
     // Print fit parameters
     std::cout << "Fit Parameters for Gaussian Function:\n";
