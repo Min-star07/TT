@@ -1,8 +1,5 @@
 #include "HistogramManager.h"
 
-// HistogramManager::HistogramManager(const std::string& filename) {
-//     m_file = new TFile(filename.c_str(), "RECREATE");
-// }
 HistogramManager::HistogramManager(TString filename) {
     m_file = new TFile(filename, "RECREATE");
 }
