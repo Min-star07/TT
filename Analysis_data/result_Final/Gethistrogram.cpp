@@ -118,14 +118,14 @@ int main (int argc, char** argv){
     TString ROB = ROB_default;
     TString CB = CB_default;
     TString mode = mode_default;
-    // save histogram to root file
-
-    TString outrootfile = "./CB"+ CB +"/ROB" + ROB  + "/Final_result_CB" + CB  + "_ROB"+ ROB +".root";
-    // 创建直方图管理器对象
-    HistogramManager manager(outrootfile);
     int ROB_int = atoi(ROB_default.c_str());
     int mode_int = atoi(mode_default.c_str());
      // Call the function to format the number
+    // save histogram to root file
+    TString outrootfile = "./CB"+ CB +"/ROB" + ROB  + "/Final_result_CB" + CB  + "_ROB"+ ROB +".root";
+    // 创建直方图管理器对象
+    HistogramManager manager(outrootfile);
+   
     std::string formatted_ROB = formatNumber(ROB_int);
     // Output the formatted number
     // std::cout << "Formatted number: " << formatted_ROB << std::endl;
