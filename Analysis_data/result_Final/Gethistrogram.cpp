@@ -12,9 +12,12 @@
 #include <TStyle.h>
 #include <TPaveStats.h>
 #include <iomanip>
+#include <vector>
 #include "Mystyle.h"
 #include "FitHistogramWithGaussian.h"
+#include "HistogramManager.h"
 using namespace std;
+
 
 // Gaussian function with parameters: amplitude (A), mean (mu), and standard deviation (sigma)
 Double_t gaussian(Double_t *x, Double_t *par) {
@@ -115,7 +118,11 @@ int main (int argc, char** argv){
     TString ROB = ROB_default;
     TString CB = CB_default;
     TString mode = mode_default;
+    // save histogram to root file
 
+    TString outrootfile = "./CB"+ CB +"/ROB" + ROB  + "/Final_result_CB" + CB  + "_ROB"+ ROB +".root";
+    // 创建直方图管理器对象
+    HistogramManager manager(outrootfile);
     int ROB_int = atoi(ROB_default.c_str());
     int mode_int = atoi(mode_default.c_str());
      // Call the function to format the number
@@ -199,13 +206,23 @@ int main (int argc, char** argv){
                     fitFunction->SetParError(3, ped_gauss[6]);
                 
                 }
+                
                 histogram->Draw();
                 gaussFunc->Draw("same");
                 // canvas1->Update();
+                // histograms.push_back(histogram);
+                // histogramSaver.saveHistograms(histograms);
             }
+            manager.addHistogram(histogram);
+           
+
+           
+
                 
         canvas1->Print("CB"+ CB +"/ROB" + ROB + "/Final_result_CB" + CB + "_ROB" + ROB +".pdf");    
     }
     canvas1->Print("CB"+ CB +"/ROB" + ROB + "/Final_result_CB" + CB + "_ROB" + ROB +".pdf]");
+   // 保存直方图到 ROOT 文件
+    manager.saveHistograms();
     return 0;
 }
