@@ -1,0 +1,43 @@
+figure.figsize: 8,6
+
+savefig.dpi: 80
+axes.linewidth: 1
+axes.axisbelow: True
+axes.ymargin: 0.
+axes.xmargin: 0.
+axes.spines.bottom: True
+axes.spines.left: True
+axes.spines.right: True
+axes.spines.top: True
+font.size: 16
+
+#axes.grid: True
+grid.color: black
+grid.linewidth: .1
+grid.linestyle: dashed
+grid.alpha: .5
+
+xtick.bottom: True
+xtick.top: False
+xtick.direction: in
+xtick.major.size: 10
+xtick.major.width: 1
+xtick.minor.size: 7
+xtick.minor.width: .5
+xtick.minor.visible: True
+xtick.major.pad: 10
+
+#xtick.labelsize : x-large
+
+ytick.left: True
+ytick.right: False
+ytick.direction: in
+ytick.major.size: 10
+ytick.major.width: 1
+ytick.minor.size: 7
+ytick.minor.width: .5
+ytick.minor.visible: True
+ytick.major.pad: 10
+#ytick.labelsize : x-large
+
+
