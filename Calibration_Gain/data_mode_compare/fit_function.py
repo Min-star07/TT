@@ -36,3 +36,7 @@ def q_function(x, a00, a1, a2, a3, a4):
     else:
         index = -1 * a3 * np.power(x, a4)
         return a00 + a2 * (1 - np.exp(index))
+
+
+def ADC_to_charge(Q1, a1):
+    return Q1 / a1
